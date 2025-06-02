@@ -1,0 +1,1 @@
+# flutter_mini_app_crypto

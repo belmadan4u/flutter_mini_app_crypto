@@ -1,0 +1,214 @@
+{
+   "assets": [
+      {
+         "ticker": "BTC",
+         "name": "Bitcoin",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/btc.svg",
+         "averagePrice": 80787,
+         "change24h": 3.54009
+      },
+      {
+         "ticker": "ETH",
+         "name": "Ethereum",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/eth.svg",
+         "averagePrice": 1923.81,
+         "change24h": 3.90346
+      },
+      {
+         "ticker": "USDT",
+         "name": "Tether",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/usdt.svg",
+         "averagePrice": 0.924085,
+         "change24h": 0.50675
+      },
+      {
+         "ticker": "XRP",
+         "name": "Ripple",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/xrp.svg",
+         "averagePrice": 2.27,
+         "change24h": 2.32994
+      },
+      {
+         "ticker": "BNB",
+         "name": "BNB",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/bnb.svg",
+         "averagePrice": 578.68,
+         "change24h": 0.8995
+      },
+      {
+         "ticker": "SOL",
+         "name": "Solana",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/sol.svg",
+         "averagePrice": 132.84,
+         "change24h": 8.33163
+      },
+      {
+         "ticker": "USDC",
+         "name": "USD Coin",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/usdc.svg",
+         "averagePrice": 0.923925,
+         "change24h": 0.48427
+      },
+      {
+         "ticker": "ADA",
+         "name": "Cardano",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/ada.svg",
+         "averagePrice": 0.674317,
+         "change24h": 3.12921
+      },
+      {
+         "ticker": "DOGE",
+         "name": "Dogecoin",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/doge.svg",
+         "averagePrice": 0.163071,
+         "change24h": 3.55653
+      },
+      {
+         "ticker": "TRX",
+         "name": "Tron",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/trx.svg",
+         "averagePrice": 0.210901,
+         "change24h": -2.37967
+      },
+      {
+         "ticker": "LINK",
+         "name": "Chainlink",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/link.svg",
+         "averagePrice": 14,
+         "change24h": 5.62705
+      },
+      {
+         "ticker": "TON",
+         "name": "Toncoin",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/ton.svg",
+         "averagePrice": 3.43,
+         "change24h": 1.34148
+      },
+      {
+         "ticker": "AVAX",
+         "name": "Avalanche",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/avax.svg",
+         "averagePrice": 20.24,
+         "change24h": 12.23488
+      },
+      {
+         "ticker": "XLM",
+         "name": "Stellar",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/xlm.svg",
+         "averagePrice": 0.267658,
+         "change24h": 3.75106
+      },
+      {
+         "ticker": "HBAR",
+         "name": "Hedera",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/hbar.svg",
+         "averagePrice": 0.177468,
+         "change24h": 4.81488
+      },
+      {
+         "ticker": "SHIB",
+         "name": "Shiba Inu",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/shib.svg",
+         "averagePrice": 0.00001233,
+         "change24h": 3.64207
+      },
+      {
+         "ticker": "SUI",
+         "name": "Sui",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/sui.svg",
+         "averagePrice": 2.23,
+         "change24h": 6.80255
+      },
+      {
+         "ticker": "DOT",
+         "name": "Polkadot",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/dot.svg",
+         "averagePrice": 4.33,
+         "change24h": 5.0859
+      },
+      {
+         "ticker": "LTC",
+         "name": "Litecoin",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/ltc.svg",
+         "averagePrice": 86.13,
+         "change24h": 1.62421
+      },
+      {
+         "ticker": "BCH",
+         "name": "Bitcoin Cash",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/bch.svg",
+         "averagePrice": 303.97,
+         "change24h": 1.98781
+      },
+      {
+         "ticker": "UNI",
+         "name": "Uniswap",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/uni.svg",
+         "averagePrice": 6.52,
+         "change24h": 5.0913
+      },
+      {
+         "ticker": "NEAR",
+         "name": "NEAR Protocol",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/near.svg",
+         "averagePrice": 2.77,
+         "change24h": 8.55844
+      },
+      {
+         "ticker": "APT",
+         "name": "Aptos",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/apt.svg",
+         "averagePrice": 5.38,
+         "change24h": 3.76664
+      },
+      {
+         "ticker": "DAI",
+         "name": "Dai",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/dai.svg",
+         "averagePrice": 0.923753,
+         "change24h": 0.46564
+      },
+      {
+         "ticker": "PEPE",
+         "name": "Pepe",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/pepe.svg",
+         "averagePrice": 0.00000707,
+         "change24h": 5.16879
+      },
+      {
+         "ticker": "ICP",
+         "name": "Internet Computer",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/icp.svg",
+         "averagePrice": 5.58,
+         "change24h": 4.09431
+      },
+      {
+         "ticker": "AAVE",
+         "name": "Aave",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/aave.svg",
+         "averagePrice": 177.49,
+         "change24h": 3.98245
+      },
+      {
+         "ticker": "MNT",
+         "name": "Mantle",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/mnt.svg",
+         "averagePrice": 0.777145,
+         "change24h": 7.39576
+      },
+      {
+         "ticker": "ONDO",
+         "name": "Ondo",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/ondo.svg",
+         "averagePrice": 0.818583,
+         "change24h": 6.04636
+      },
+      {
+         "ticker": "ETC",
+         "name": "Ethereum Classic",
+         "logoUrl": "https://dkstoragepublicprod.blob.core.windows.net/public-assets/etc.svg",
+         "averagePrice": 16.82,
+         "change24h": 3.06075
+      }
+   ]
+}

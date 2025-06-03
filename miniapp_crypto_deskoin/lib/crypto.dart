@@ -1,4 +1,5 @@
 class Crypto {
+  final int rank;
   final String ticker;
   final String name;
   final String logoUrl;
@@ -7,16 +8,19 @@ class Crypto {
   final String id;
 
   Crypto({
-      required this.ticker,
-      required this.name,
-      required this.logoUrl,
-      required this.averagePrice,
-      required this.change24h,
-      required this.id,
-    });
+    required this.rank,
+    required this.ticker,
+    required this.name,
+    required this.logoUrl,
+    required this.averagePrice,
+    required this.change24h,
+    required this.id,
+  });
+
 
   factory Crypto.fromJson(Map<String, dynamic> json) {
     return Crypto(
+      rank: json['rank'],
       ticker: json['ticker'],
       name: json['name'],
       logoUrl: json['logoUrl'],

@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "miniapp_crypto_deskoin",
+            "cwd": "miniapp_crypto_deskoin",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "miniapp_crypto_deskoin (profile mode)",
+            "cwd": "miniapp_crypto_deskoin",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "miniapp_crypto_deskoin (release mode)",
+            "cwd": "miniapp_crypto_deskoin",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

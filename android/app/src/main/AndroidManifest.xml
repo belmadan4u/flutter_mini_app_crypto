@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="miniapp_crypto_deskoin"
+        android:label="flutter_mini_app_crypto"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

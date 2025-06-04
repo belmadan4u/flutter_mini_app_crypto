@@ -1,4 +1,4 @@
-package com.example.miniapp_crypto_deskoin
+package com.example.flutter_mini_app_crypto
 
 import io.flutter.embedding.android.FlutterActivity
 

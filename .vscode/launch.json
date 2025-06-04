@@ -5,21 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "miniapp_crypto_deskoin",
-            "cwd": "miniapp_crypto_deskoin",
+            "name": "flutter_mini_app_crypto",
+            "cwd": "flutter_mini_app_crypto",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "miniapp_crypto_deskoin (profile mode)",
-            "cwd": "miniapp_crypto_deskoin",
+            "name": "flutter_mini_app_crypto (profile mode)",
+            "cwd": "flutter_mini_app_crypto",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "miniapp_crypto_deskoin (release mode)",
-            "cwd": "miniapp_crypto_deskoin",
+            "name": "flutter_mini_app_crypto (release mode)",
+            "cwd": "flutter_mini_app_crypto",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

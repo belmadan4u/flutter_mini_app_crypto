@@ -1,6 +1,6 @@
 {
-    "name": "miniapp_crypto_deskoin",
-    "short_name": "miniapp_crypto_deskoin",
+    "name": "flutter_mini_app_crypto",
+    "short_name": "flutter_mini_app_crypto",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

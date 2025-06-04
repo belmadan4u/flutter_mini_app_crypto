@@ -8,8 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
     - uses: actions/checkout@v3
 
@@ -18,7 +17,7 @@ jobs:
       with:
         channel: stable
 
-    - name: Enable web support
+    - name: Enable Web
       run: flutter config --enable-web
       working-directory: miniapp_crypto_deskoin
 
@@ -26,8 +25,8 @@ jobs:
       run: flutter pub get
       working-directory: miniapp_crypto_deskoin
 
-    - name: Build web
-      run: flutter build web --release --base-href /miniapp_crypto_deskoin/
+    - name: Build web release
+      run: flutter build web --release
       working-directory: miniapp_crypto_deskoin
 
     - name: Deploy to GitHub Pages

@@ -34,10 +34,7 @@ This will start a mock server at `http://localhost:3000`.
 
 ### 3. Run the Flutter application
 
-Navigate to the project folder:
-
 ```bash
-cd miniapp_crypto_deskoin
 flutter run
 ```
 
@@ -49,12 +46,5 @@ Make sure the URL in your Flutter code points to `http://localhost:3000` or use 
 
 ---
 
-## 📁 Project Structure
-
-```
-.
-├── data.json                # Mock data for json-server
-└── miniapp_crypto_deskoin  # Flutter project
-```
 
 ![Home Screen](miniapp_crypto_deskoin/screen_home_page.png)

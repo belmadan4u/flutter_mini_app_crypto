@@ -9,10 +9,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # nécessaire pour pousser sur gh-pages
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -21,18 +22,15 @@ jobs:
 
       - name: Enable web support
         run: flutter config --enable-web
-        working-directory: miniapp_crypto_deskoin
 
       - name: Get dependencies
         run: flutter pub get
-        working-directory: miniapp_crypto_deskoin
 
-      - name: Build web
-        run: flutter build web --base-href=/flutter_mini_app_crypto/ --release
-        working-directory: miniapp_crypto_deskoin
+      - name: Build Web
+        run: flutter build web --release
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: miniapp_crypto_deskoin/build/web
+          publish_dir: build/web

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
-import 'package:miniapp_crypto_deskoin/crypto.dart';
-import 'package:miniapp_crypto_deskoin/detail.dart';
+import 'crypto.dart';
+import 'detail.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

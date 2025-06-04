@@ -10,28 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: stable
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
 
-    - name: Enable web support
-      run: flutter config --enable-web
-      working-directory: miniapp_crypto_deskoin
+      - name: Enable web support
+        run: flutter config --enable-web
+        working-directory: miniapp_crypto_deskoin
 
-    - name: Get dependencies
-      run: flutter pub get
-      working-directory: miniapp_crypto_deskoin
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: miniapp_crypto_deskoin
 
-    - name: Build web
-      run: flutter build web --release
-      working-directory: miniapp_crypto_deskoin
+      - name: Build Flutter Web
+        run: flutter build web --release --base-href=/flutter_mini_app_crypto/
+        working-directory: miniapp_crypto_deskoin
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: miniapp_crypto_deskoin/build/web
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: miniapp_crypto_deskoin/build/web

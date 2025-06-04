@@ -27,7 +27,7 @@ jobs:
       working-directory: miniapp_crypto_deskoin
 
     - name: Build web
-      run: flutter build web --release"
+      run: flutter build web --release
       working-directory: miniapp_crypto_deskoin
 
     - name: Deploy to GitHub Pages

@@ -47,4 +47,4 @@ Make sure the URL in your Flutter code points to `http://localhost:3000` or use 
 ---
 
 
-![Home Screen](miniapp_crypto_deskoin/screen_home_page.png)
+![Home Screen](screen_home_page.png)

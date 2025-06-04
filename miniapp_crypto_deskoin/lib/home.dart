@@ -18,14 +18,18 @@ class MyHomePage extends StatefulWidget {
 enum SortOrder { none, ascending, descending }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String? _errorMessage;
+
   List<Crypto> _cryptos = [];
   bool _loading = true;
   SortOrder _futureSortOrderAvgPrice = SortOrder.none;
   SortOrder _futureSortOrderChange24h = SortOrder.none;
 
-  int _cryptoByPage = 10;
+  final int _cryptoByPage = 10;
   int _currentPage = 1;
   List<Crypto> _cryptoShowed = [];
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState(){
@@ -33,28 +37,54 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadCryptos();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _loadCryptos() async {
-    final response = await http.get(Uri.parse('http://localhost:3000/assets'));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
+    try {
+      final response = await http.get(Uri.parse('http://localhost:3000/assets'));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonData = json.decode(response.body);
+        setState(() {
+          _cryptos = jsonData.asMap().entries.map((entry) {
+            final index = entry.key;
+            final json = entry.value;
+            return Crypto.fromJson({...json, 'rank': index + 1});
+          }).toList();
+
+          /*await Future.wait(_cryptos.map((crypto) async {
+            final imgResponse = await http.get(Uri.parse(crypto.logoUrl));
+
+            if (imgResponse.statusCode != 200) {
+              print('Error for ${crypto.name}');
+            } else {
+              String svgContent = imgResponse.body;
+              final cleanedSvg = svgContent.replaceAll(RegExp(r'<style[^>]*>.*?</style>', dotAll: true), '');
+
+              crypto.logoUrl = cleanedSvg;
+            }
+          }));*/
+
+          _loading = false;
+          _errorMessage = null;
+          _currentPage = 1;
+          _updateCryptoShowed();
+        });
+      } else {
+        setState(() {
+          _loading = false;
+          _errorMessage = 'Error : ${response.statusCode}';
+        });
+      }
+    } catch (e) {
       setState(() {
-        _cryptos = jsonData.asMap().entries.map((entry) {
-          final index = entry.key;
-          final json = entry.value;
-          return Crypto.fromJson({...json, 'rank': index + 1});
-        }).toList();
         _loading = false;
-        _currentPage = 1;
-        _updateCryptoShowed();
+        _errorMessage = 'Error 500';
       });
-     /* final imageTest = await http.get(Uri.parse(_cryptos[4].logoUrl));
-      if (imageTest.statusCode != 200) {
-        print('Erreur de chargement de l\'image SVG');
-      }else{
-        print(imageTest.body);
-      }*/
-    } else {
-      throw Exception('Erreur lors du chargement des utilisateurs');
     }
   }
 
@@ -86,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _currentPage = 1;
       _updateCryptoShowed();
     });
+    scrollToTheTop();
   }
 
   void _sortCryptoChange24h() {
@@ -108,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _currentPage = 1;
       _updateCryptoShowed();
     });
+    scrollToTheTop();
   }
 
   void _nextPage() {
@@ -116,7 +148,16 @@ class _MyHomePageState extends State<MyHomePage> {
         _currentPage++;
         _updateCryptoShowed();
       });
+      scrollToTheTop();
     }
+  }
+
+  void scrollToTheTop(){
+     _scrollController.animateTo(
+          0.0,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
   }
 
   void _previousPage() {
@@ -125,14 +166,22 @@ class _MyHomePageState extends State<MyHomePage> {
         _currentPage--;
         _updateCryptoShowed();
       });
+      scrollToTheTop();
     }
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1e2328),
-      body: _loading ? Center(child: CircularProgressIndicator()): 
-        Column(
+      body: _loading
+      ? CircularProgressIndicator()
+      : _errorMessage != null
+          ? Text(
+              _errorMessage!,
+              style: TextStyle(fontSize: 20, color: Colors.red),
+              textAlign: TextAlign.center,
+            )
+          : Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [ 
             SizedBox( // row ne sait pas gérer la hauteur, on doit ajouter une height
@@ -140,24 +189,20 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Text("Sort by :"),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
                       backgroundColor: _futureSortOrderAvgPrice != SortOrder.none ? Colors.blue : Colors.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
                     ),
                     onPressed: _sortCryptoAvgPrice,
                     child: Row(
                       children: [
                         Text("Price"),
                         if (_futureSortOrderAvgPrice != SortOrder.none) ...[
-                          SizedBox(width: 4),
-                          Icon(
+                          Text(
                             _futureSortOrderAvgPrice == SortOrder.descending
-                                ? Icons.arrow_upward
-                                : Icons.arrow_downward,
-                            size: 16,
-                            color: Colors.white,
+                                ? " - ascending"
+                                : " - descending"
                           ),
                         ]
                       ],
@@ -165,22 +210,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: _futureSortOrderChange24h != SortOrder.none ? Colors.blue : Colors.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      backgroundColor: _futureSortOrderChange24h != SortOrder.none ? Colors.blue : Colors.grey
                     ),
                     onPressed: _sortCryptoChange24h,
                     child: Row(
                       children: [
-                        Text("Change24h"),
+                        Text("Variation"),
                         if (_futureSortOrderChange24h != SortOrder.none) ...[
-                          SizedBox(width: 4),
-                          Icon(
+                          Text(
                             _futureSortOrderChange24h == SortOrder.descending
-                                ? Icons.arrow_upward
-                                : Icons.arrow_downward,
-                            size: 16,
-                            color: Colors.white,
+                                ? " - ascending"
+                                : " - descending"
                           ),
                         ]
                       ],
@@ -190,125 +230,127 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             _cryptos.isEmpty ? Text(
-              "Aucune crypto n'a été récupérée",
-              style: TextStyle(color: Colors.white),
+              "No crypto was fetched",
             ) :
             Expanded( // au cas ou pr gerer les erreur lié a column
               child: ListTileTheme(
                 textColor: Colors.white, // psk le texttheme de myapp se fait overrider par les params du listview 
                 iconColor: Colors.white,
-                child: ListView.builder(
-                  itemCount: _cryptoShowed.length,
-                  itemBuilder: (context, i) {
-                    final c = _cryptoShowed[i];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPage(crypto: c),
-                          ),
-                        );
-                      },
-                      child: Card(
-                        color: Colors.grey[900],
-                        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            
-                            children: [
-                              // Rang + Logo
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SizedBox(
-                                    width: 24,
-                                    child: Text(
-                                      '${c.rank}',
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  SvgPicture.network(
-                                    c.logoUrl,
-                                    width: 40,
-                                    height: 40,
-                                    placeholderBuilder: (context) => SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(strokeWidth: 2),
-                                    ),
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        Icon(Icons.error, color: Colors.redAccent),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(width: 16),
-
-                              // Nom + Prix
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Scrollbar(
+                  thumbVisibility: true, 
+                  controller: _scrollController, 
+                  child: ListView.builder(
+                    controller: _scrollController, 
+                    itemCount: _cryptoShowed.length,
+                    itemBuilder: (context, i) {
+                      final c = _cryptoShowed[i];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(crypto: c),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.grey[900],
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              
+                              children: [
+                                // Rang + Logo
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      c.name,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    SizedBox(
+                                      width: 24,
+                                      child: Text(
+                                        '${c.rank}',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      'Price: ${c.averagePrice} USD',
-                                      style: TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 14,
+                                    SizedBox(width: 12),
+                                    SvgPicture.network(
+                                      c.logoUrl,
+                                      width: 40,
+                                      height: 40,
+                                      placeholderBuilder: (context) => SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(strokeWidth: 2),
                                       ),
+                                      errorBuilder: (context, error, stackTrace) =>
+                                          Icon(Icons.error, color: Colors.redAccent),
                                     ),
                                   ],
                                 ),
-                              ),
 
-                              // Variation %
-                              Text(
-                                '${c.change24h > 0 ? '+' : ''}${c.change24h.toStringAsFixed(2)}%',
-                                style: TextStyle(
-                                  color: c.change24h > 0 ? Colors.green : Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                SizedBox(width: 16),
+
+                                // Nom + Prix
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        c.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        'Price: ${c.averagePrice} USD',
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+
+                                // Variation %
+                                Text(
+                                  '${c.change24h > 0 ? '+' : ''}${c.change24h.toStringAsFixed(2)}%',
+                                  style: TextStyle(
+                                    color: c.change24h > 0 ? Colors.green : Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    );
-                  }
-                ),
+                        )
+                      );
+                    }
+                  )
+                  ),
+                )
               )
-            ),
+            ,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
                   onPressed: _currentPage > 1 ? _previousPage : null,
-                  child: Text("Précédent"),
+                  child: Text("Previous"),
                 ),
                 Text(
-                  'Page $_currentPage / ${(_cryptos.length / _cryptoByPage).ceil()}',
-                  style: TextStyle(color: Colors.white),
+                  'Page $_currentPage / ${(_cryptos.length / _cryptoByPage).ceil()}'
                 ),
                 TextButton(
                   onPressed: (_currentPage * _cryptoByPage) < _cryptos.length ? _nextPage : null,
-                  child: Text("Suivant"),
+                  child: Text("Next"),
                 ),
               ],
             )

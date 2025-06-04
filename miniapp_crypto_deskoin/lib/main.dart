@@ -15,9 +15,23 @@ class MyApp extends StatelessWidget {
       title: 'Crypto Market Lite',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF1e2328)),
         scaffoldBackgroundColor: Color(0xFF1e2328),
-        textTheme: Typography.whiteMountainView,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF1e2328),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white, 
+          ),
+        ),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+        scrollbarTheme: ScrollbarThemeData(
+          thumbColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            return Colors.white38;
+          }),
+        )
       ),
       home: const MyHomePage(title: 'Home'),
     );

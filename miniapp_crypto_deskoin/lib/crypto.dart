@@ -2,7 +2,7 @@ class Crypto {
   final int rank;
   final String ticker;
   final String name;
-  final String logoUrl;
+  String logoUrl;
   final double averagePrice; 
   final double change24h;
   final String id;

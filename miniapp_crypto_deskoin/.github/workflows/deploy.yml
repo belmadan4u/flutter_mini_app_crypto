@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -27,8 +27,8 @@ jobs:
         run: flutter pub get
         working-directory: miniapp_crypto_deskoin
 
-      - name: Build Flutter Web
-        run: flutter build web --release --base-href=/flutter_mini_app_crypto/
+      - name: Build web
+        run: flutter build web --base-href=/flutter_mini_app_crypto/ --release
         working-directory: miniapp_crypto_deskoin
 
       - name: Deploy to GitHub Pages
